@@ -7,23 +7,25 @@
     <title>Document</title>
     <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 </head>
 <body>
     <div id="root"></div>
 </body>
-<script>
+<script type="text/babel">
     const root = document.getElementById('root');
-    const h3 = React.createElement('h3', {
-        id: 'sexy-h3',
-        style: {
-            color: 'red'
-        }
-    }, "hello i'm a h3");
-    const button = React.createElement('button', {
-        onClick: () => console.log('im clicked'),
-        onMouseEnter: () => console.log('mouse enter')
-    }, 'Click me');
-    const container = React.createElement('div', null, [h3, button]);
-    ReactDOM.render(container, root);
+    const App = () => {
+        const [counter, setCounter] =  React.useState(0);
+        const onClick = () => {
+            setCounter(counter + 1);
+        };
+        return (
+            <div>
+                <h3>Total clicks: {counter}</h3>
+                <button onClick={onClick}>Click me</button>
+            </div>
+        )
+    };
+    ReactDOM.render(<App/>, root);
 </script>
 </html>
