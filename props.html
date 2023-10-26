@@ -13,13 +13,14 @@
       crossorigin
       src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"
     ></script>
+    <script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   </head>
   <body>
     <div id="root"></div>
   </body>
   <script type="text/babel">
-    function Btn({ text, changeValue }) {
+    function Btn({ text = "text required", changeValue = () => {} }) {
       console.log(text, "was render");
       return (
         <button
@@ -39,7 +40,10 @@
     function ConfirmBtn() {
       return <button>confirm Change</button>;
     }
-    const MemorizedBtn = React.memo(Btn);
+    // const MemorizedBtn = React.memo(Btn);
+    Btn.propTypes = {
+      text: PropTypes.string.isRequired,
+    };
     const App = () => {
       const [value, setValue] = React.useState("Save Changes");
       /**
@@ -55,12 +59,12 @@
       const changeValue = () => setValue("Revert Changes");
       return (
         <div>
-          <MemorizedBtn
+          <Btn
             style={{ color: "green" }}
             text={value}
             changeValue={changeValue}
           />
-          <MemorizedBtn text="Continue" />
+          <Btn text="Change" />
         </div>
       );
     };
