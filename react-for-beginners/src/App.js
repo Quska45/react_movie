@@ -15,6 +15,7 @@ function App() {
   // keyword의 상태가 변할 때마다 실행되도록 사용함. 간단한 로직도 넣어 봤음.
   useEffect(() => {
     console.log("i run when keyword changes");
+    return () => console.log("keyword effect destroy");
   }, [keyword]);
   useEffect(() => {
     console.log("i run when counter changes");
